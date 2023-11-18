@@ -2,7 +2,7 @@ import connectMongoDB from "@/libs/mongodb";
 import Topic from "@/model/topic"; 
 import { NextResponse } from "next/server";
 
-export async function PUT(request, { params }) {  
+export async function PUT(request: { json: () => PromiseLike<{ newTitle: any; newDescription: any; newName: any; newEmail: any; newPhone: any; newMessage: any; }> | { newTitle: any; newDescription: any; newName: any; newEmail: any; newPhone: any; newMessage: any; }; }, { params }: any) {  
   const { id } = params;
   const { newTitle:title,newDescription:description,newName:name, newEmail:email,newPhone:phone, newMessage:message } = await request.json();
   await connectMongoDB();  
@@ -10,7 +10,7 @@ export async function PUT(request, { params }) {
   return NextResponse.json({ message: "Topic updated" }, { status: 200 });
 }
 
-export async function GET(request, { params }) { 
+export async function GET(request: any, { params }: any) { 
   const { id } = params;
   await connectMongoDB();
   const topic = await Topic.findOne({ _id: id });

@@ -1,7 +1,7 @@
 import EditTopicForm from '@/components/EditTopicForm'
 import React from 'react';
 
-const getTopicById = async (id) => {
+const getTopicById = async (id: any) => {
   try {
     const res = await fetch(`http://localhost:3000/api/topics/${id}`, {
       cache: "no-store",
@@ -18,7 +18,7 @@ const getTopicById = async (id) => {
 };
 
 
-export default async function EditTopic({params}) { 
+export default async function EditTopic({params}) {   
   const {id}= params;
   const { topic } = await getTopicById(id);
   const { title, description } = topic;
